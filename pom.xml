@@ -6,7 +6,8 @@
     <modules>
         <module>currencyService</module>
         <module>cryptoCurrencyService</module>
-        <module>mainService</module>
+        <module>configService</module>
+        <module>api-gateway</module>
     </modules>
 
     <parent>
