@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Sign in</title>
+</head>
+<body class="text-center">
+<main class="form-signin">
+    <form name="sign_in_form" method="post" action="/login" novalidate>
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <div class="form-floating">
+            <label for="sign_in_login">Login</label>
+            <input type="text" class="form-control" id="sign_in_login" name="username"
+                   placeholder="Username">
+        </div>
+
+        <div class="form-floating">
+            <label for="sign_in_password">Password</label>
+            <input type="password" class="form-control" id="sign_in_password" name="password" placeholder="Password">
+
+            <div class="invalid-feedback d-block">
+                <p id="sign_in_password_msg"></p>
+            </div>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <br/>
+        <br/>
+    </form>
+    <button class="w-100 btn btn-lg btn-secondary">
+        <a class="w-100 btn btn-lg btn-secondary" href="">Sign up</a>
+    </button>
+
+</main>
+</body>
+</html>

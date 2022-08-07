@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>Chat WebSocket</title>
+
+    <script src="sockjs.js"></script>
+    <script src="stomp.js"></script>
+
+    <script type="text/javascript">
+
+        var stompClient = null;
+
+        function setConnected(connected) {
+
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('response').innerHTML = '';
+        }
+
+        function connect() {
+
+            var socket = new SockJS('/wsp');
+            stompClient = Stomp.over(socket);
+
+            stompClient.connect({}, function (frame) {
+
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/currency/list', function (messageOutput) {
+                    showMessageOutput(JSON.parse(messageOutput.body));
+                });
+            });
+        }
+
+        function disconnect() {
+
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+
+            setConnected(false);
+            console.log("Disconnected");
+        }
+
+        function showMessageOutput(messageOutput) {
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            console.log(messageOutput.length - 1)
+            for (var i=0; i<=messageOutput.length-1; i++) {
+                p.appendChild(document.createTextNode(messageOutput.get(i)));
+            }
+        }
+    </script>
+
+</head>
+
+<body onload="disconnect()">
+<div>
+    <br/>
+    <div>
+        <button id="connect" onclick="connect();">Connect</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+    </div>
+    <br/>
+    <div id="conversationDiv">
+        <p id="response"></p>
+    </div>
+</div>
+
+</body>
+</html>
